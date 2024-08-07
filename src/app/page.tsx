@@ -9,6 +9,9 @@ export default function Home() {
     codeUrl: "Build/LuckyWheel.wasm",
     streamingAssetsUrl: "StreamingAssets",
   });
+  window.addEventListener("message", (event)=>{
+    handleClickLoadButton();
+  })
   const handleClickLoadButton = () => {
     sendMessage("AssetManager", "LoadDataPreview", "https://66b18a7b1ca8ad33d4f45f7d.mockapi.io/game/api/WheelOfFortune/1");
   };
