@@ -1,5 +1,5 @@
 'use client'
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 
 export default function Home() {
@@ -10,14 +10,15 @@ export default function Home() {
     codeUrl: "Build/LuckyWheel.wasm",
     streamingAssetsUrl: "StreamingAssets",
   });
+  const handleClickLoadButton = useCallback(() => {
+    sendMessage("AssetManager", "LoadDataPreview", "https://66b18a7b1ca8ad33d4f45f7d.mockapi.io/game/api/WheelOfFortune/1");
+  }, [isLoaded]);
   useEffect(()=>{
     window.addEventListener("message", (event)=>{
       handleClickLoadButton();
     })
-  }, [])
-  const handleClickLoadButton = () => {
-    sendMessage("AssetManager", "LoadDataPreview", "https://66b18a7b1ca8ad33d4f45f7d.mockapi.io/game/api/WheelOfFortune/1");
-  };
+  }, [handleClickLoadButton])
+
   return (
     <main className="flex min-h-screen justify-center items-center gap-10">
       <div className="flex mx-auto items-center justify-center w-[100vw] h-[100vh] drop-shadow-glow">
